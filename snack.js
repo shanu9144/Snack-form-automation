@@ -11,6 +11,7 @@ const { resolveBrowserAndProfile } = require("./browser-resolver");
     // On Render: use Puppeteer's bundled Chromium, headless
     browser = await puppeteer.launch({
       headless: true,
+      executablePath: puppeteer.executablePath(),
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
