@@ -123,6 +123,12 @@ function getProfileDirs(browserType) {
 }
 
 function resolveBrowserAndProfile({ log = false } = {}) {
+  // On Render, always use Puppeteer's bundled Chromium
+  if (process.env.RENDER || process.env.RENDER_EXTERNAL_HOSTNAME) {
+    if (log) console.log('Render environment detected: using Puppeteer bundled Chromium.');
+    return { browserPath: null, userDataDir: null, browserType: 'puppeteer-bundled' };
+  }
+
   const browserPaths = getBrowserPaths();
   let browserType = null;
   let browserPath = null;

@@ -3,28 +3,43 @@ const puppeteer = require("puppeteer");
 const { resolveBrowserAndProfile } = require("./browser-resolver");
 
 
+
 (async () => {
   const { browserPath, userDataDir, browserType } = resolveBrowserAndProfile({ log: true });
-  if (!browserPath || !userDataDir) {
+  let browser;
+  if (browserType === 'puppeteer-bundled') {
+    // On Render: use Puppeteer's bundled Chromium, headless
+    browser = await puppeteer.launch({
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-gpu",
+        "--ozone-platform=x11"
+      ]
+    });
+  } else if (browserPath && userDataDir) {
+    // Local: use system browser and user profile
+    browser = await puppeteer.launch({
+      headless: true,
+      executablePath: browserPath,
+      userDataDir: userDataDir,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-gpu",
+        "--ozone-platform=x11"
+      ],
+      env: {
+        ...process.env,
+        DISPLAY: process.env.DISPLAY || ':0',
+        XDG_SESSION_TYPE: 'x11'
+      }
+    });
+  } else {
     console.error("No supported browser/profile found. Exiting.");
     process.exit(1);
   }
-  const browser = await puppeteer.launch({
-    headless: true,
-    executablePath: browserPath,
-    userDataDir: userDataDir,
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-gpu",
-      "--ozone-platform=x11"
-    ],
-    env: {
-      ...process.env,
-      DISPLAY: process.env.DISPLAY || ':0',
-      XDG_SESSION_TYPE: 'x11'
-    }
-  });
 
   const page = await browser.newPage();
 

@@ -4,13 +4,14 @@
   "description": "Automate Google Forms submission using Puppeteer and schedule with node-cron.",
   "main": "scheduler.js",
   "scripts": {
-    "start": "node scheduler.js"
+     "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "node-cron": "^3.0.3",
+     "express": "^4.18.2"
     "puppeteer": "^24.34.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2"
