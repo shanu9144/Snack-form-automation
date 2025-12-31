@@ -1,0 +1,5 @@
+ grep -Ri "shantanu.sharma@w3villa.com" ~/.config/google-chrome/*/Preferences
+npm i
+
+
+grep -Ri "shantanu.sharma" ~/.config/google-chrome/*/Preferences

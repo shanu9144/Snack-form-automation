@@ -1,0 +1,48 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Puppeteer browser/user data (if any)
+puppeteer_profile/
+user_data/
+
+# VSCode settings
+.vscode/
+
+# Shell history and output
+*.sh~
+*.swp
+
+# Misc
+*.bak
+*.tmp
+
+# Ignore output from Render or deployment
+render-build/
+
+# Ignore compiled output (if any)
+dist/
+build/
+
+# Ignore coverage reports
+coverage/
+
+# Ignore cron job output
+*.out
+*.err
+
+# Ignore any local config
+local.settings.json
